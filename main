@@ -34,7 +34,17 @@ font = pygame.font.Font('freesansbold.ttf', 20)
 game_over_font = pygame.font.Font('freesansbold.ttf', 64)
 
 ##########################################  Objects and defs ####################################################################################################
+#as class
+class Bullet():
+    def __init__(self) :
+        bulletImage = pygame.image.load('Sprites/bullet.png')
+        bullet_X = 0
+        bullet_Y = 500
+        bullet_Xchange = 0
+        bullet_Ychange = 5
+        bullet_state = "rest"
 
+#as regular variables
 bulletImage = pygame.image.load('Sprites/bullet.png')
 bullet_X = 0
 bullet_Y = 500
@@ -94,20 +104,16 @@ def isCollision(x1, x2, y1, y2):
 
 running = True
 while running:
-    # RGB
     DISPLAY.fill(BLACK)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
-        # Controling the player movement from the arrow keys
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
                 player_Xchange = -2
             if event.key == pygame.K_RIGHT:
                 player_Xchange = 2
             if event.key == pygame.K_SPACE:
-                # Fixing the change of direction of bullet
                 if bullet_state == "rest":
                     bullet_X = player_X
                     bullet(bullet_X, bullet_Y)
@@ -154,7 +160,7 @@ while running:
 
 
 
-    # restricting the spaceship so that it doesn't go out of screen
+    # boundaries
     if player_X <= 16:
         player_X = 16
     elif player_X >= 800:
